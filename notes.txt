@@ -1,0 +1,50 @@
+Three collections
+
+1. Teams
+Team id, team name, array of team leads, array of resource ids, creator ID
+
+2. Employees
+Employee ID, employee name, array of team IDs to which they belong
+
+3. Tasks
+Employee ID, team ID, Task description, assigned by, Start time, Finish time, deleted? , deleted by, rating on 5
+
+
+
+
+Initially, let the user enter his employee ID and app just proceeds as if he's authenticated.
+
+One handleError method to handle all errors
+Appropriate error code is logged.
+
+The schema doesn't do anything to the inputs. I thought if Schema says String, 
+int inputs will be queried as String, but no. Idk what's the use of schema.
+
+
+Hmmmmmmm schema is the upper limit of the records you can handle at mongoose level. Example, there was a 
+typo in the tasks schema, I'd written employeeId instead of ID and that field in the input JSON
+was not being written into DB.
+"When people say that MongoDB “has no schema”, they really mean that it does not enforce schema 
+the way SQL databases do. MongoDB pushes schema concerns up to your application level, 
+where you can handle them more flexibly. For example, in order to add a new field to your documents, 
+you don’t need to do an all-or-nothing ALTER on your collection—potentially millions of entries. 
+You just add that field to your ODM (Mongoose) schema and you’re done." 
+
+Explore the possibility of adding constraints in the schema.
+The default constraint works only while creating new documents
+
+
+instead of async.each I can just use $in in most cases here. Sigh.
+Or use mongoose schema middleware
+
+Turns out I'll not be needing aync anywhere
+$in and $each will do it.
+
+
+Improvements on the front end-
+On the teams page just show number of resources and leads and name
+Background color of textview will vary randomly :D
+
+
+When I hosted everything on AWS, it used to turn off after I closed the session.
+Had to use screen command to keep everything running.
